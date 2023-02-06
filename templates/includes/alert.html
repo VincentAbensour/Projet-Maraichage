@@ -1,0 +1,30 @@
+<style>
+
+    .messages{
+        padding : 2px;
+        max-height: 30px;
+        max-width: 600px;
+        background-color : rgb(221, 52, 52);
+        border-radius: 10px;
+        text-align: center;
+        
+    }
+
+
+</style>
+
+{% if messages %}
+<div id="message" class="message-container">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }} messages"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<script type="text/javascript">
+setTimeout( function(){
+    var oMsg = document.getElementById('message');
+    oMsg.style.display = 'none';
+  }, 5000);
+</script>

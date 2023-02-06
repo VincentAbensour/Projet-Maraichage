@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="fruit_section fruit_section_all layout_padding-top">
+
+{% if request.GET.command == 'verification' %}
+
+<div style="max-width: 1200px;  margin-top:100px; margin: auto;">
+  <div style=" background-color:rgb(26, 141, 26); color: black; text-align: center;">
+    Nous vous avons envoyé un lien de validation à {{request.GET.email}}. Merci de cliquer dessus pour activer votre compte.
+  </div>
+</div>
+
+{% endif %}
+
+<div class="login-card">
+  {% include 'includes/alert.html' %}
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="login-detail">
+            <label class="custom_heading-text" for="email-login">Email : </label>
+            <input type="email" name="email" id="email-login" required>
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Mot De Passe: </label>
+            <input type="password" name="password" id="password-login" required>
+          </div>
+          <div class="login-button">
+            <button class="custom_orange-btn" type="submit"> Se Connecter</button>
+          </div>
+      </form>
+
+
+
+</div>
+</section>
+
+{% endblock%}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+    <!-- fruits section -->
+
+  <section class="fruit_section fruit_section_all layout_padding-top">
+    
+    <div class="container fruit-container">
+    {% if products.count == 0%}
+      <h2 class="custom_heading custom_heading-market">La récolte n'est pas encore prête, revenez plus tard!</h2>
+      {% else %}
+      <h2 class="custom_heading custom_heading-market">Nos Légumes de la semaine</h2>
+
+      {% if is_ordered %}
+        <p class="custom_heading-text">
+          Pour continuer à remplir votre panier vous devez d'abord l'invalider : 
+        </p>
+        <div class="">
+          <a href="unvalidate_cart" class="custom_dark-btn" >
+            Invalider Mon Panier
+          </a>
+        </div> 
+      {% else %}
+      {% endif %}
+
+
+      <div class="custom-container">
+
+        {% for product in products %}
+
+          <div class="custom-row-fruit-card layout_padding-fruit-card-image" >
+
+            <div class="fruit_img-box">
+              <img src="{{ product.product_stockitem.image.url }}" alt=f"{{product.name}}-image" class="" style="max-width:150px; max-height:100px" />
+            </div>
+
+            <div class="layout_padding-fruit-card-item-nom-prix">
+              <div class="padding-fruit-card-item-nom">{{ product.product_stockitem.name}}</div>
+              <div class="padding-fruit-card-item-price">{{ product.product_stockitem.price}}$ / {{ product.product_stockitem.unit}}</div>
+            </div>
+
+            <div class="layout_padding-fruit-card-item">{{ product.stock}} {{ product.product_stockitem.unit}} Disponible </div>
+        
+            <form action="{% url 'add_to_cart' product.id %}" method="POST">
+              {% csrf_token %}
+
+              <div class="item-quantity-setter"> 
+                <label for="totalAmt">Quantité à ajouter</label>
+                {% if product.product_stockitem.unit == "Pce" %}
+                <input type="number" required step="1" id="totalAmt" name="item-quantity" style="max-width: 20%;" max={{product.stock}} min="1">
+                {% else %}
+                <input type="number" required step="0.1" id="totalAmt" name="item-quantity" style="max-width: 20%;" max={{product.stock}} min="0.1">
+                {% endif %}
+              </div>
+              
+              {% if is_ordered %}
+              {% else %}
+                <div class="fruit-card-button">
+                  <button type="submit" class="custom_dark-btn" >
+                    Ajouter Au Panier
+                  </button>
+                </div>
+              {% endif %}
+
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %} 
+    </div>
+  </section>
+
+  <!-- end fruits section -->
+{% endblock%}
+
+
+  <!--
+<div class="row custom-row layout_padding-fruit-card-image" >
+
+  <div class="fruit_img-box d-flex justify-content-center align-items-center">
+    <img src="{{ product.product_stockitem.image.url }}" alt=f"{{product.name}}-image" class="" style="max-width:150px; max-height:100px" />
+  </div>
+
+  <div class="layout_padding-fruit-card-item-nom-prix">
+    <div class="padding-fruit-card-item-nom">{{ product.product_stockitem.name}}</div>
+    <div class="padding-fruit-card-item-price">{{ product.product_stockitem.price}}$ / {{ product.product_stockitem.unit}}</div>
+  </div>
+
+  <div class="layout_padding-fruit-card-item">{{ product.stock}} {{ product.product_stockitem.unit}} Disponible </div>
+
+  <form action="{% url 'add_to_cart' product.id %}" method="POST">
+    {% csrf_token %}
+
+    <div class="item-quantity-setter"> 
+      <label for="totalAmt">Quantité à ajouter</label>
+      <input type="number" step="0.1" id="totalAmt" name="item-quantity" style="max-width: 20%;" max={{product.stock}}>
+    </div>
+    
+    {% if is_ordered %}
+    {% else %}
+      <div class="fruit-card-button">
+        <button type="submit" class="custom_dark-btn" >
+          Ajouter Au Panier
+        </button>
+      </div>
+    {% endif %}
+
+  </form>
+</div> 
+-->

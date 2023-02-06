@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <section class="fruit_section fruit_section_all layout_padding-top">
+    
+    <div class="container fruit-container">
+      {% include 'includes/alert.html' %}
+      <h2 class="custom_heading">Tableau de controle</h2>
+
+      <div>
+        <p> Semaine Numéro {{week.get_week_number}}</p>
+        <p> Fin de la période de commande le {{end_shopping_date}}</p>
+      </div>
+
+      <div class="custom-container dashbord-container">
+        <div class="table-total-harvest-container">
+          <table class="table-total-harvest">
+              <thead>
+                  <tr>
+                      <th colspan="2"> Récapitulatif de récole</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <th>Produit</th>
+                  <th>Quantité</th>    
+                  {% for key, value in items.items %}
+                  <tr>
+                      <td>{{key}}</td>
+                      <td>{{value}} {{item.stock_item.product_stockitem.unit}}</td>
+                  </tr>           
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
+
+        <h4 class="custom_heading">Récapitulatif des Paniers</h4>
+
+          <div class="table-total-harvest-container">
+            <table class="table-total-harvest">
+                <thead>
+                  <tr>
+                      <th>Nom</th>
+                      <th>Email</th>
+                      <th>Validé</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cart in carts %}
+                      <tr>   
+                          <td>{{cart.cart_user.firstname | title}} {{cart.cart_user.lastname | title }}</td>
+                          <td>{{cart.cart_user.email}}</td> 
+                          {% if cart.is_ready%}
+                            <td style="background-color: green;"><a href="{% url 'cart_detail' cart.cart_id %}">Panier Prêt</a></td>
+                          {% else %}
+                          <td style="background-color: red;"><a href="{% url 'cart_detail' cart.cart_id %}">Panier à prépaper</a></td>   
+                          {% endif %}                        
+                      </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+     
+    </div>
+  </section>
+
+{% endblock%}

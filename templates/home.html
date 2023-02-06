@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero_area home-banner" style="padding-top: 15px;">
+  {% include 'includes/alert.html' %}
+<section class=" slider_section position-relative">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="slider_item-box">
+            <div class="slider_item-container">
+              <div class="container" >
+                <div class="row" >
+                  <div class="col-md-6">
+                    <div class="slider_item-detail">
+                      <div class="card-text-banner">
+                        <h1>
+                          Bienvenue <br />
+                          Dans notre Ferme
+                        </h1>
+                        
+                        <p>
+                          There are many variations of passages of Lorem
+                          Ipsum available, but the majority have suffered
+                          alteration in some form, by injected humour, or
+                          randomised words which don't look even slightly
+                          believable.
+                        </p>
+                        <div class="d-flex">
+                          <a href="{% url 'market' %}" class="text-uppercase custom_dark-btn mr-3" style="background-color: #798a4c">
+                            Nos légumes
+                          </a>
+                          <a href="" class="text-uppercase custom_dark-btn">
+                            Nous trouver
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- end slider section -->
+</div>
+
+<!-- service section -->
+
+<section class="service_section layout_padding ">
+  <div class="container">
+
+    <h2 class="custom_heading p-xl-5">Qui Sommes Nous</h2>
+    <p class="custom_heading-text">
+      Une longue et passionnante description de la ferme avec énormément d'images buquoliques qui donnent au chaland une envie irrépressible de manger des légumes 
+    </p>
+
+    <div class=" layout_padding2">
+    
+    </div>
+
+  </div>
+</section>
+
+<!-- end service section -->
+
+<!-- contact section -->
+<section class="contact_section layout_padding">
+  <div class="container">
+    <h2 class="font-weight-bold">
+      Nous Contacter
+    </h2>
+    <div class="row">
+      <div class="col-md-8 mr-auto">
+        <form action="">
+          <div class="contact_form-container">
+            <div>
+              <div>
+                <input type="text" placeholder="Nom" class="textarea-contact">
+              </div>
+              <div>
+                <input type="email" placeholder="Email" class="textarea-contact">
+              </div>
+
+              <div class="mt-5">
+                <textarea class="textarea-contact" placeholder="Message"></textarea>
+              </div>
+              <div class="mt-5 custom_orange-btn">
+                <button type="submit" >
+                  send
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end contact section -->
+    
+{% endblock %}

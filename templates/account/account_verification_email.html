@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+Bonjour {{user.firstname}}
+
+Pour valider votre compte, merci de cliquer sur ce lien: 
+http://{{domaine}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

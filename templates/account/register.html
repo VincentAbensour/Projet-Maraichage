@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="fruit_section fruit_section_all layout_padding-top">
+
+<div class="login-card">
+    {% include 'includes/alert.html' %}
+
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="login-detail">
+            <label class="custom_heading-text" for="email-login">Prénom : </label>
+            {{form.firstname}}
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Nom de Famille : </label>
+            {{form.lastname}}
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Email : </label>
+            {{form.email}}
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Pseudo : </label>
+            {{form.username}}
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Mot de Passe: </label>
+            {{form.password}}
+          </div>
+          <div class="login-detail">
+            <label  class="custom_heading-text" for="password-login">Confirmez votre Mot de Passe: </label>
+            {{form.confirm_password}}
+          </div>
+          <div class="login-button">
+            <button class="custom_orange-btn" type="submit"> Créer mon Compte </button>
+          </div>
+    </form>
+
+
+</div>
+</section>
+
+{% endblock%}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+    <!-- fruits section -->
+
+<section class="fruit_section fruit_section_all layout_padding-top">   
+  
+  <div class="container fruit-container">
+    {% include 'includes/alert.html' %}
+    <h2 class="custom_heading">Mon Panier</h2>     
+        
+    {% if not shopping_active %}
+      <p class="custom_heading-text">
+        La période de validation des paniers a pris fin le {{end_shopping_date}}
+      </p> 
+    {% else %}
+      <p class="custom_heading-text">
+        Le total de votre panier est de <strong>{{total_price}}€</strong>
+      </p>
+        {% if not user.is_authenticated%}
+            <p class="custom_heading-text">
+              Vous devez vous connecter pour valider votre panier: 
+              <div>
+                <a href="{% url 'login' %}" class="custom_dark-btn">
+                  Me Connecter
+                </a>
+              </div>
+            </p>       
+        {% else %}      
+            {% if cart.is_ordered %}
+              <p class="custom_heading-text"> 
+                Votre Panier est validé
+                <div>
+                  <a href="{% url 'unvalidate_cart' %}" class="custom_dark-btn">
+                    Modifier Mon Panier
+                  </a>
+                </div>
+                </p>
+            {% else %}
+              <p class="custom_heading-text">
+                Vous avez jusqu'au {{end_shopping_date}} pour valider votre panier</p>
+                <div>
+                  <a href="{% url 'validate_cart' %}" class="custom_dark-btn">
+                    Valider Mon Panier
+                  </a>
+                </div>
+              </p>
+            {% endif %}   
+        {% endif %}       
+    {% endif %}
+      
+      
+      <div class="custom-container">
+
+        {% for product in products %}
+          <div class="row custom-row layout_padding-fruit-card-image" >
+            
+            <div class="fruit_img-box d-flex justify-content-center align-items-center">
+              <img src="{{ product.stock_item.product_stockitem.image.url }}" alt=f"{{product.name}}-image" class="" style="max-width:150px; max-height:100px" />
+            </div>
+          <div class="layout_padding-fruit-card-item-nom-prix">
+            <div class="padding-fruit-card-item-nom">{{ product.stock_item.product_stockitem.name}}</div>
+            <div class="padding-fruit-card-item-price">{{ product.stock_item.product_stockitem.price}}€ / {{ product.stock_item.product_stockitem.unit}}</div>
+          </div>
+          <div class="layout_padding-fruit-card-item">{{ product.stock_item.stock}} {{ product.stock_item.product_stockitem.unit}} Disponible </div>
+          <div class="layout_padding-fruit-card-item"><strong>{{ product.quantity}} {{ product.stock_item.product_stockitem.unit}} dans votre panier </strong></div>
+           
+          {% if cart.is_ordered %}
+          <p class="custom_heading-text">
+            Total: {{product.get_total_price}}€
+          </p> 
+          {% else %}
+            <div>
+              <a href="{% url 'remove_from_cart' product.id %}" class="custom_dark-btn" >
+                Retirer du Panier
+              </a>
+            </div>
+          {% endif %}
+
+          </div>
+        {% endfor %}
+
+      </div>
+     
+    </div>
+</section>
+
+  <!-- end fruits section -->
+
+{% endblock%}

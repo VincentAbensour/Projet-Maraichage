@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="fruit_section fruit_section_all layout_padding-top">
+
+  <div class="container fruit-container">
+    <h4 class="custom_heading">Panier de {{cart.cart_user.firstname | title}}</h4>
+
+      <div class="table-cart-view-producter-container">
+
+          <table class="table-cart-view-producer">
+            <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>Quantité</th>
+                  <th>Prix</th>
+                </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th colspan="3"> Prix Total du Panier : <strong>{{cart_price}}€</strong></th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {% for item in cartitems %}
+                <tr>
+                    <td>{{item.stock_item.product_stockitem.name}}</td>
+                    <td>{{item.quantity}} {{item.stock_item.product_stockitem.unit}}</td> 
+                    <td>{{item.get_total_price}}€</td>       
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+      </div>
+       
+  </div>
+
+    {% if cart.is_ready %}
+      <p class="custom_heading-text"> Le Panier est Validé </p>
+    {% else %}
+      <a href="{% url 'validate_cart' cart.cart_id %}" class="custom_dark-btn" >
+        Valider le Panier
+      </a>
+    {% endif %}
+
+</section>
+
+{% endblock %}
