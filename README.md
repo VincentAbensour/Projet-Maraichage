@@ -2,7 +2,7 @@
 
 ### About the project
 
-This project is an e-commerce site desgined to help farmer to sell their products. It's mainly a training project for myself.
+This project is an e-commerce site designed to help farmers to sell their products. It's mainly a training project for myself.
 Every week they can propose to their customers a stock of vegetables.
 The customers will then create a cart in the limit of this stock and then confirm their choice.
 The farmer will then access to a dashboard where he will find a summary of the harvest he need to do and a summary of how to dispatch it in every cart with the related customer's informations and price.
@@ -63,11 +63,13 @@ Then coming back to the website you can create a new profile by clicking registe
 `EMAIL_HOST_USER =`
 `EMAIL_HOST_PASSWORD = `
 
-When it's done you can add product from the market in your cart and have a look at your cart. When your cart is ready you can validate it wich will influence the avalaibe stock. If you want to add the items to your cart you will need to invalidate it.
+Alternatively, and for a quick test, you can modify the 'is_active' value of the created account to True in the admin panel. (You need to connect with your superuser account)
+
+When it's done you can add products from the market in your cart and have a look at your cart. When your it's ready you can validate it wich will impact the avalaible stock. If you want to delete or add new items to your cart you will need to invalidate it.
 
 If you connect with an admin account, you will have access to the dashboard where you will have a summary of the carts and what needs to be harvest. You can click on a particular cart and validate it to inform the customer that his cart is ready to be retrieved by sending him an email.
 
-This website doesn't include a payment service. 
+This website doesn't include a payment service.
 
 ### About the Code
 
